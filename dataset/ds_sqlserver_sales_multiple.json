@@ -1,0 +1,46 @@
+{
+	"name": "ds_sqlserver_sales_multiple",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlserver_nishita_patient",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRICE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALE_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REGION",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sale_test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

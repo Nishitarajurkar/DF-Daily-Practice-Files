@@ -1,0 +1,35 @@
+{
+	"name": "ds_azuresqldb_patients",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_azuresql_clintrial",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "cust_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cust_name",
+				"type": "varchar"
+			},
+			{
+				"name": "cust_city",
+				"type": "varchar"
+			},
+			{
+				"name": "cust_emailid",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "patients"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
