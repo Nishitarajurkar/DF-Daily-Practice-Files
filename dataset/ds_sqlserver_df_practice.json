@@ -1,0 +1,46 @@
+{
+	"name": "ds_sqlserver_df_practice",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlserver_df_practice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRICE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALE_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REGION",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sale_test_refined"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "ls_sqlserver_df_practice",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost\\SQLEXPRESS",
+			"database": "data_factory_practice",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "Windows",
+			"userName": "LAPTOP-N1UJ2V4M\\hp",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxZTU3YmVhYy03Yjg0LTRiOTktOTM4ZC04Y2U5OWNiYWE4ODgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "shir-local-computer",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

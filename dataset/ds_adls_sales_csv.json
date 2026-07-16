@@ -1,0 +1,19 @@
+{
+	"name": "ds_adls_sales_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_clintrial_dev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "sourcefiles/listfiles",
+				"fileSystem": "cr-clintrial"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

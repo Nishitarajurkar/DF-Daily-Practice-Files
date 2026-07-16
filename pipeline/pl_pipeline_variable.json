@@ -1,0 +1,109 @@
+{
+	"name": "pl_pipeline_variable",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy srcfiles to tgt files",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "setvartargetfile",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_srcfiles_variable",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_tgtfiles_variable",
+						"type": "DatasetReference",
+						"parameters": {
+							"ptgtfilename": {
+								"value": "@concat('customer',variables('vcurrenttimestamp'),'.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "setvartargetfile",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "vcurrenttimestamp",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"vcurrenttimestamp": {
+				"type": "String"
+			},
+			"v_srcfilename": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "for_each_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-07-12T06:54:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

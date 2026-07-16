@@ -1,0 +1,109 @@
+{
+	"name": "pl_pipeline_parameter_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_adls_source_file_pl_para",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDsSorceFolder": {
+								"value": "@pipeline().parameters.pSourceFolder",
+								"type": "Expression"
+							},
+							"pDsSourceFile": {
+								"value": "@pipeline().parameters.pSourceFile",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_tgtfiles_adls",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDstgtfolder": {
+								"value": "@pipeline().parameters.pTargetFolder",
+								"type": "Expression"
+							},
+							"pDstgtfiles": {
+								"value": "@pipeline().parameters.pTargetFile",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"pSourceFolder": {
+				"type": "string",
+				"defaultValue": "sourcefiles\\sales\\"
+			},
+			"pSourceFile": {
+				"type": "string",
+				"defaultValue": "sales_feb.csv.csv"
+			},
+			"pTargetFolder": {
+				"type": "string",
+				"defaultValue": "tgtfiles\\sales\\"
+			},
+			"pTargetFile": {
+				"type": "string",
+				"defaultValue": "sales_para_.csv"
+			}
+		},
+		"folder": {
+			"name": "for_each_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-07-12T06:54:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

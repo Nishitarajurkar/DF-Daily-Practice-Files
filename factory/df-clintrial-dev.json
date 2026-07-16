@@ -1,0 +1,15 @@
+{
+	"name": "df-clintrial-dev",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bc5b4644-b645-49b3-9d39-03e073b99de1",
+		"tenantId": "f03ea723-91c3-4143-922a-7fefe3728085"
+	}
+}
