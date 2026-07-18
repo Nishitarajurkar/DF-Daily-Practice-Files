@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "sourcefiles/sales",
+				"folderPath": "tgtfiles/sales",
 				"fileSystem": "cr-clintrial"
 			},
 			"columnDelimiter": ",",
