@@ -1,0 +1,117 @@
+{
+	"name": "copy_src_target_usingparamterisation",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_adls_srcfiles_sales",
+						"type": "DatasetReference",
+						"parameters": {
+							"pdssrccontainername": {
+								"value": "@pipeline().parameters.pplsrcContainername",
+								"type": "Expression"
+							},
+							"pdssrcfolderpath": {
+								"value": "@pipeline().parameters.pplsrcFolderpath",
+								"type": "Expression"
+							},
+							"pdsscfilename": {
+								"value": "@pipeline().parameters.pplsrcFilename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_adls_target_sales",
+						"type": "DatasetReference",
+						"parameters": {
+							"pdstargetcontainername": {
+								"value": "@pipeline().parameters.ppltgtContainername",
+								"type": "Expression"
+							},
+							"pdstargetfolderpath": {
+								"value": "@pipeline().parameters.ppltgtFolderpath",
+								"type": "Expression"
+							},
+							"pdsfilename": {
+								"value": "@pipeline().parameters.ppltgtFilename",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"pplsrcContainername": {
+				"type": "string"
+			},
+			"pplsrcFolderpath": {
+				"type": "string"
+			},
+			"pplsrcFilename": {
+				"type": "string"
+			},
+			"ppltgtContainername": {
+				"type": "string"
+			},
+			"ppltgtFolderpath": {
+				"type": "string"
+			},
+			"ppltgtFilename": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "for_each_activity"
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,44 @@
+{
+	"name": "ds_adls_target_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_gen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"pdstargetcontainername": {
+				"type": "string"
+			},
+			"pdstargetfolderpath": {
+				"type": "string"
+			},
+			"pdsfilename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().pdsfilename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().pdstargetfolderpath",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().pdstargetcontainername",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
