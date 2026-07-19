@@ -6,13 +6,13 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"psrccontainername": {
+			"pdssrccontainername": {
 				"type": "string"
 			},
-			"psrcfolderpath": {
+			"pdssrcfolderpath": {
 				"type": "string"
 			},
-			"pscfilename": {
+			"pdsscfilename": {
 				"type": "string"
 			}
 		},
@@ -21,9 +21,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "turkey_sales.csv",
-				"folderPath": "sourcefiles/sales",
-				"fileSystem": "cr-clintrial"
+				"fileName": {
+					"value": "@dataset().pdsscfilename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().pdssrcfolderpath",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().pdssrccontainername",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

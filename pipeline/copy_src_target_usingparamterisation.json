@@ -50,17 +50,65 @@
 				"inputs": [
 					{
 						"referenceName": "ds_adls_srcfiles_sales",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pdssrccontainername": {
+								"value": "@pipeline().parameters.pplsrcContainername",
+								"type": "Expression"
+							},
+							"pdssrcfolderpath": {
+								"value": "@pipeline().parameters.pplsrcFolderpath",
+								"type": "Expression"
+							},
+							"pdsscfilename": {
+								"value": "@pipeline().parameters.pplsrcFilename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_adls_target_sales",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pdstargetcontainername": {
+								"value": "@pipeline().parameters.ppltgtContainername",
+								"type": "Expression"
+							},
+							"pdstargetfolderpath": {
+								"value": "@pipeline().parameters.ppltgtFolderpath",
+								"type": "Expression"
+							},
+							"pdsfilename": {
+								"value": "@pipeline().parameters.ppltgtFilename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"pplsrcContainername": {
+				"type": "string"
+			},
+			"pplsrcFolderpath": {
+				"type": "string"
+			},
+			"pplsrcFilename": {
+				"type": "string"
+			},
+			"ppltgtContainername": {
+				"type": "string"
+			},
+			"ppltgtFolderpath": {
+				"type": "string"
+			},
+			"ppltgtFilename": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "for_each_activity"
 		},
