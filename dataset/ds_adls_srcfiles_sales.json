@@ -5,6 +5,17 @@
 			"referenceName": "ls_adls_gen_2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"psrccontainername": {
+				"type": "string"
+			},
+			"psrcfolderpath": {
+				"type": "string"
+			},
+			"pscfilename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

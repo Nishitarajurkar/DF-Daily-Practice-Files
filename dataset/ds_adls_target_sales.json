@@ -5,13 +5,34 @@
 			"referenceName": "ls_adls_gen2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"pdstargetcontainername": {
+				"type": "string"
+			},
+			"pdstargetfolderpath": {
+				"type": "string"
+			},
+			"pdsfilename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "tgtfiles/sales",
-				"fileSystem": "cr-clintrial"
+				"fileName": {
+					"value": "@dataset().pdsfilename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().pdstargetfolderpath",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().pdstargetcontainername",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
