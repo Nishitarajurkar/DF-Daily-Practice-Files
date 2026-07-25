@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT * FROM [edcsrcmetadata].[srcEdcClintrailToLandControl] WHERE Enabled = 'TRUE'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -161,7 +162,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "@concat('SELECT ,MAX([', coalesce(item().WatermarkColName,'MODIFIED_TS'),']) AS NewWatermark FROM ', item().SrcSchemaName, '.', item().SrcTableName)",
+										"value": "@concat('SELECT MAX([', coalesce(item().WatermarkColName,'MODIFIED_TS'),']) AS NewWatermark FROM ', item().SrcSchemaName, '.', item().SrcTableName)",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
