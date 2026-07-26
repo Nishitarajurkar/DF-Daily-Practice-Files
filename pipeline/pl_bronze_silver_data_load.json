@@ -1,0 +1,76 @@
+{
+	"name": "pl_bronze_silver_data_load",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup_bronze_silver_control_tab",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "@concat(\r\n        'SELECT * FROM ',pipeline().parameters.pPISchemaname,'.',pipeline().parameters.pPITablename,' WHERE Enable = ''True''')",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_sqlserverTablesparameter",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDsServerName": {
+								"value": "@pipeline().parameters.pPIServername",
+								"type": "Expression"
+							},
+							"pDsdatabaseName": {
+								"value": "@pipeline().parameters.pPIDatabasename",
+								"type": "Expression"
+							},
+							"pDsSchemaName": {
+								"value": "@pipeline().parameters.pPISchemaname",
+								"type": "Expression"
+							},
+							"pDsTableName": {
+								"value": "@pipeline().parameters.pPITablename",
+								"type": "Expression"
+							}
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"parameters": {
+			"pPIServername": {
+				"type": "string",
+				"defaultValue": "localhost\\SQLEXPRESS"
+			},
+			"pPIDatabasename": {
+				"type": "string",
+				"defaultValue": "dev_clintrail_edc_src"
+			},
+			"pPISchemaname": {
+				"type": "string",
+				"defaultValue": "edcsrcmetadata"
+			},
+			"pPITablename": {
+				"type": "string",
+				"defaultValue": "srcEdcBronzeToSilverControl"
+			}
+		},
+		"folder": {
+			"name": "dev_clintrial/bronze_silver_load"
+		},
+		"annotations": []
+	}
+}
