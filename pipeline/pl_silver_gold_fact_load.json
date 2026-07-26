@@ -69,7 +69,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Notebook silver_gold_dim_table",
+							"name": "Notebook silver_gold_Fact_table",
 							"type": "DatabricksNotebook",
 							"dependsOn": [],
 							"policy": {
