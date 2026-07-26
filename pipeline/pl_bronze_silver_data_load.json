@@ -112,7 +112,7 @@
 										"type": "Expression"
 									},
 									"businessKey": {
-										"value": "@item().USUBJID",
+										"value": "@item().BusinessKey",
 										"type": "Expression"
 									}
 								}
