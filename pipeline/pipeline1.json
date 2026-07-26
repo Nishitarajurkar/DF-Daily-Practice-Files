@@ -1,0 +1,9 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"folder": {
+			"name": "dev_clintrial/clintrial_master"
+		},
+		"annotations": []
+	}
+}
