@@ -80,7 +80,7 @@
 										"type": "Expression"
 									},
 									"tgtCatalog": {
-										"value": "@item().SrcContainerName",
+										"value": "@item().TgtCatalog",
 										"type": "Expression"
 									},
 									"tgtSchema": {
