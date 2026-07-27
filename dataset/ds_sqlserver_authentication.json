@@ -1,0 +1,29 @@
+{
+	"name": "ds_sqlserver_authentication",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlserver_multiple_parameter",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"pdatabase": {
+					"value": "@dataset().pdsdourcedatabase",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"pdsdourcedatabase": {
+				"type": "string"
+			},
+			"pdssourceschemaname": {
+				"type": "string"
+			},
+			"pdssourcetablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}

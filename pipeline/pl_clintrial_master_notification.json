@@ -1,0 +1,83 @@
+{
+	"name": "pl_clintrial_master_notification",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute  master Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "executes_pipelines",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Web_failure",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute  master Pipeline",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-04.centralindia.logic.azure.com:443/workflows/30b705efa1164fb69b0b921fd97465b2/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=gf4dLHAxrVCze5utcGpDUjy0g58SgMj-DmuEeKb-XQg",
+					"body": {
+						"value": "{    \n    \"Status\" : \"Failed\",\n    \"pipelineName\" :\"@{pipeline().Pipeline}\",\n    \"ErrorMsg\" : \"@{activity('Execute  master Pipeline').Error.Message}\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "web_success",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute  master Pipeline",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-04.centralindia.logic.azure.com:443/workflows/30b705efa1164fb69b0b921fd97465b2/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=gf4dLHAxrVCze5utcGpDUjy0g58SgMj-DmuEeKb-XQg",
+					"body": {
+						"value": "{    \n     \"Status\" : \"Success\",\n    \"pipelineName\" :\"@{pipeline().Pipeline}\",\n    \"StartTime\": \"@{pipeline().TriggerTime}\",\n    \"EndTime\": \"@{utcNow()}\"\n}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "dev_clintrial/clintrial_master"
+		},
+		"annotations": []
+	}
+}
